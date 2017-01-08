@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // ****************************************************************************
+        // Initialize Parse SDK
+        // ****************************************************************************
+        
+        let configuration = ParseClientConfiguration {
+            // Add your Parse applicationId:
+            $0.applicationId = "your_application_id"
+            // Uncomment and add your clientKey (it's not required if you are using Parse Server):
+            $0.clientKey = "your_client_key"
+            
+            // Uncomment the following line and change to your Parse Server address;
+            $0.server = "https://YOUR_PARSE_SERVER/parse"
+            
+            // Enable storing and querying data from Local Datastore.
+            // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
+            $0.isLocalDatastoreEnabled = true
+        }
+        Parse.initialize(with: configuration)
+        
         return true
     }
 
